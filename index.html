@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alina2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;800&display=swap');
+
+        :root {
+            --bg-light: #f9f9f9;
+            --main-black: #111111;
+            --accent-pink: #ff3399;
+            --muted-gold: #d5be9b;
+            --dark-red: #4a0e17;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /* Убирает серое выделение при тапе на iPhone */
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--main-black);
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        /* Мобильный контейнер в один экран по ширине */
+        .phone-wrapper {
+            width: 100%;
+            max-width: 430px; /* Ширина топовых iPhone Pro Max */
+            margin: 0 auto;
+            background: #fff;
+        }
+
+        section {
+            padding: 40px 20px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+        /* обложка */
+    .magazine-cover {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* Занимает весь экран телефона */
+        background-color: #000;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-bottom: 3px solid #000;
+    }
+
+    /* ФОТОГРАФИЯ - ЗАДНИЙ ФОН */
+    .cover-image-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .cover-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Фото заполнит весь экран без искажений */
+        /* filter: brightness(0.9); — можно чуть притемнить, если текст плохо видно */
+    }
+
+    /* ГЛАВНОЕ НАЗВАНИЕ ЖУРНАЛА */
+    .cover-masthead {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding-top: 30px;
+    }
+
+    .cover-masthead h1 {
+        font-family: 'Bodoni Moda', serif;
+        font-size: 5.5rem;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+        line-height: 0.8;
+        margin: 0;
+        /* Эффект тени, чтобы текст читался на любом фоне */
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+
+    /* БОКОВЫЕ ЗАГОЛОВКИ */
+    .cover-headlines {
+        position: relative;
+        z-index: 3;
+        padding: 20px;
+        color: #fff;
+        text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    }
+
+    .left-headlines {
+        position: absolute;
+        bottom: 120px;
+        left: 20px;
+        max-width: 150px;
+    }
+
+    .right-headlines {
+        position: absolute;
+        bottom: 180px;
+        right: 20px;
+        text-align: right;
+        max-width: 180px;
+    }
+
+    .headline-main {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        line-height: 1;
+        margin-bottom: 5px;
+    }
+
+    .headline-sub {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        font-weight: 400;
+        letter-spacing: 1px;
+    }
+
+    /* НИЖНЯЯ ПАНЕЛЬ: ШТРИХ-КОД И ВЫПУСК */
+    .cover-footer {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 20px;
+        background: linear-gradient(transparent, rgba(0,0,0,0.4));
+    }
+
+    .barcode-area {
+        background: #fff;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0.9;
+    }
+
+    .barcode-lines {
+        width: 60px;
+        height: 30px;
+        /* Имитация штрих-кода через градиент */
+        background: repeating-linear-gradient(90deg, #000, #000 2px, #fff 2px, #fff 4px);
+    }
+
+    .issue-info {
+        color: #fff;
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+        /* --- 1. HERO SECTION --- */
+        .hero-section {
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .main-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3.2rem;
+            line-height: 0.9;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .main-title span {
+            display: block;
+            font-style: italic;
+            font-weight: 700;
+            color: var(--main-black);
+        }
+
+        .hero-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 30px;
+            padding: 0 10px;
+            text-align: justify;
+        }
+
+        /* Инста-коллаж: 2х2 аккуратных поста */
+        .insta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .insta-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 6px;
+            border-radius: 4px;
+        }
+
+        .insta-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+            border-radius: 2px;
+        }
+
+        /* --- 2. 10 FACTS --- */
+        .facts-section {
+            background: #fff;
+        }
+
+        .facts-section h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        .fact-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .fact-num {
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #fff;
+            background: var(--accent-pink);
+            padding: 3px 6px;
+            margin-right: 12px;
+            border-radius: 3px;
+            min-width: 26px;
+            text-align: center;
+        }
+
+        .fact-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* --- 3. PINTEREST BOARD --- */
+        .pinterest-section h2 {
+            font-family: 'Bodoni Moda', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .pin-board {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .pin {
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        .pin img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .p-long { height: 180px; }
+        .p-short { height: 120px; }
+
+        /* --- 4. CAN'T LIVE WITHOUT --- */
+        .cant-live-header {
+            background: var(--muted-gold);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .icons-vibe-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 30px 10px;
+        }
+
+        .icon-box {
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .icon-box svg {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 6px;
+            stroke: #111;
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        /* --- 5. EXCLUSIVE INTERVIEW --- */
+        .interview-header {
+            background: var(--dark-red);
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.5rem;
+        }
+
+        .interview-content {
+            padding: 25px 15px;
+        }
+
+        .qa-block {
+            margin-bottom: 18px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 10px;
+        }
+
+        .qa-block h3 {
+            font-size: 0.85rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .qa-block p {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* --- 6. WHAT THEY THINK ABOUT ME --- */
+        .polka-dot-bg {
+            background-image: radial-gradient(#111 12%, transparent 13%);
+            background-size: 20px 20px;
+            background-color: #fff;
+            padding: 40px 20px;
+        }
+
+        .polka-dot-bg h2 {
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-align: center;
+            background: #fff;
+            display: inline-block;
+            padding: 4px 10px;
+        }
+
+        .sticker-quote {
+            background: #fff;
+            border: 1.5px dashed #aaa;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-style: italic;
+            font-size: 0.85rem;
+            box-shadow: 3px 3px 0px var(--main-black);
+        }
+
+        /* --- 7. HER VIBE (Мобильный коллаж) --- */
+        .vibe-section {
+            background: #fdfdfd;
+            height: 420px;
+            position: relative;
+        }
+
+        .vibe-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 0.9;
+        }
+
+        .collage-img {
+            position: absolute;
+            border: 1px solid #000;
+            padding: 4px;
+            background: #fff;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.05);
+        }
+
+        .img-1 { top: 20px; right: 15px; width: 140px; transform: rotate(4deg); }
+        .img-2 { bottom: 30px; left: 15px; width: 160px; transform: rotate(-3deg); }
+        .img-3 { bottom: 60px; right: 20px; width: 130px; transform: rotate(6deg); }
+
+        .bubble-meme {
+            position: absolute;
+            background: #ffde00;
+            border: 1.5px solid #000;
+            padding: 4px 8px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            top: 160px;
+            left: 20px;
+            transform: rotate(-8deg);
+        }
+
+        /* --- 8. FINAL PAGE --- */
+        .final-section {
+            background: #ff54b0;
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .big-year {
+            font-size: 6rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-bottom: 10px;
+        }
+
+        .final-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        /* --- СТИЛИ ДЛЯ МУЗЫКАЛЬНОГО БЛОКА --- */
+.tracks-section {
+    background: #fff;
+}
+
+.tracks-header {
+    background: var(--dark-red); /* Сохраняем благородный темный цвет */
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    font-family: 'Bodoni Moda', serif;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.tracks-content {
+    padding: 25px 15px;
+}
+
+.track-item {
+    display: flex; /* Выстраиваем в ряд: фото + текст */
+    align-items: flex-start;
+    gap: 15px; /* Расстояние между обложкой и текстом */
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #eee;
+}
+
+.track-cover {
+    width: 65px; /* Размер обложки трека */
+    height: 65px;
+    flex-shrink: 0; /* Чтобы картинка не сжималась */
+    border-radius: 4px;
+    background-color: #eee;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.track-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.track-info h3 {
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    color: var(--main-black);
+    text-transform: uppercase;
+}
+
+.track-info p {
+    font-size: 0.8rem;
+    color: #555;
+    line-height: 1.4;
+}
+    </style>
+</head>
+<body>
+
+    <div class="phone-wrapper">
+
+<section class="magazine-cover">
+    <div class="cover-image-container">
+        <img src="images/start.png" alt="Cover Photo">
+    </div>
+
+    <div class="cover-masthead">
+        <p style="color: #fff; font-size: 0.7rem; letter-spacing: 4px; margin-bottom: 5px; font-weight: 600;">THE SPECIAL ISSUE</p>
+        <h1>ALINA</h1>
+    </div>
+
+    <div class="cover-headlines">
+        <div class="left-headlines">
+            <p class="headline-main">WHO IS THAT GIRL?</p>
+            <p class="headline-sub">The brightest girl of 2026</p>
+        </div>
+
+        <div class="right-headlines">
+            <p class="headline-main" style="color: #ff3399;">EXCLUSIVE</p>
+            <p class="headline-sub">10 facts you never knew about her</p>
+        </div>
+    </div>
+
+    <div class="cover-footer">
+        <div class="barcode-area">
+            <div class="barcode-lines"></div>
+            <span style="font-size: 8px; color: #000; font-family: monospace;">02202615</span>
+        </div>
+        <div class="issue-info">
+            JUNE 2026 <br> by R.Rushanov &nbsp
+        </div>
+    </div>
+</section>    
+
+        <section class="hero-section">
+            <h1 class="main-title">Who’s<br><span>that girl?</span></h1>
+            <p class="hero-desc">
+                <strong>Alina</strong> — the brightest personality I have known. Any cloudy day becomes better when she`s around. 
+            </p>
+            <div class="insta-grid">
+                <div class="insta-card"><img src="images/black1.jpeg" alt="Alina"></div>
+                <div class="insta-card"><img src="images/col1.jpeg" alt="Alina"></div>
+                <div class="insta-card"><img src="images/col2.jpeg" alt="Alina"></div>
+                <div class="insta-card"><img src="images/black2.jpeg" alt="Alina"></div>
+            </div>
+        </section>
+
+        <section class="facts-section">
+            <h2>10 facts abot Alina</h2>
+            <div class="fact-row"><div class="fact-num">01</div><div class="fact-text">Love Milka&Tuc Chocolate</div></div>
+            <div class="fact-row"><div class="fact-num">02</div><div class="fact-text">The most talanted girl i ever knew</div></div>
+            <div class="fact-row"><div class="fact-num">03</div><div class="fact-text">Love music and dancig</div></div>
+            <div class="fact-row"><div class="fact-num">04</div><div class="fact-text">Cook the most delicious sandwiches</div></div>
+            <div class="fact-row"><div class="fact-num">05</div><div class="fact-text">The most stylish girl on Earth</div></div>
+            <div class="fact-row"><div class="fact-num">06</div><div class="fact-text">Creativity is her second name</div></div>
+            <div class="fact-row"><div class="fact-num">07</div><div class="fact-text">It`s intresting to talk to her about everything</div></div>
+            <div class="fact-row"><div class="fact-num">08</div><div class="fact-text">Has the most beautiful eyes I`ve ever saw</div></div>
+            <div class="fact-row"><div class="fact-num">09</div><div class="fact-text">Favorite animal is a cat</div></div>
+            <div class="fact-row"><div class="fact-num">10</div><div class="fact-text">Has the cuttest voice I`ve ever heard</div></div>
+        </section>
+
+        <section class="pinterest-section">
+            <h2>Some photos</h2>
+            <div class="pin-board">
+                <div class="pin p-long"><img src="images/nails.jpeg" alt="Pin"></div>
+                <div class="pin p-short"><img src="images/fam.jpeg" alt="Pin"></div>
+                <div class="pin p-short"><img src="images/vert.jpeg" alt="Pin"></div>
+                <div class="pin p-long"><img src="images/rus.jpeg" alt="Pin"></div>
+            </div>
+        </section>
+
+        <div class="cant-live-header">She Can't Live Without</div>
+        <section style="padding:0;">
+            <div class="icons-vibe-grid">
+    <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 9l12-2M9 18c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm12-2c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"/></svg>
+        <div>Music</div>
+    </div>
+    <div class="icon-box">
+        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 7h14M5 12h14M12 2v20"/></svg>
+        <div>Choco</div>
+    </div>
+    <div class="icon-box">
+        <svg viewBox="0 0 24 24" style="transform: rotate(-15deg); margin-bottom: 8px;">
+            <path d="M21.5 2L2 11.5l6.5 2.5L21.5 2z M8.5 14l3 6.5L21.5 2L8.5 14z M8.5 14l1.5 3.5V14l-1.5 0z" />
+        </svg>
+        <div>TG</div>
+    </div>
+    <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <div>Dance</div>
+    </div>
+    <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        <div>Family</div>
+    </div>
+    <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M16 3.13a4 4 0 0 1 0 7.75M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>Friends</div>
+    </div>
+</div>
+        </section>
+
+<div class="tracks-header">Tracks that i associated with her</div>
+<section class="tracks-section" style="padding:0;">
+    <div class="tracks-content">
+        
+        <div class="track-item">
+            <div class="track-cover">
+                <img src="images/СЛ.jpg" alt="Track Cover">
+            </div>
+            <div class="track-info">
+                <h3>Горячая, гремучая</h3>
+                <p>Султан Лагучев</p>
+            </div>
+        </div>
+
+        <div class="track-item">
+            <div class="track-cover">
+                <img src="images/ЯЗ.jpg" alt="Track Cover">
+            </div>
+            <div class="track-info">
+                <h3>Я хотел бы знать</h3>
+                <p>Tony Tonite, Кравц</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+        <section class="polka-dot-bg">
+            <h2>Рядом с ней я:</h2>
+            <div class="sticker-quote">Счастлив</div>
+            <div class="sticker-quote">Спокоен</div>
+            <div class="sticker-quote">Искренен</div>
+        </section>
+
+        <section class="vibe-section">
+            <div class="vibe-title">HER<br>VIBE</div>
+            <div class="bubble-meme">Одновременно ярко и спокойно</div>
+            
+            <div class="collage-img img-1"><img src="images/sleep.jpeg" style="width:100%;"></div>
+            <div class="collage-img img-2"><img src="images/shine.jpeg" style="width:100%;"></div>
+            <div class="collage-img img-3"><img src="images/summer.jpeg" style="width:100%;"></div>
+        </section>
+
+        <section class="final-section">
+            <div class="big-year">2026</div>
+            <div class="final-text">
+                new year - new moments<br>
+                <span style="font-size:0.85rem; font-weight:400; opacity:0.8;">spend them with those who deserve it</span>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
